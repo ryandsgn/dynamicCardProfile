@@ -710,6 +710,7 @@ function render(variablesz = {}) {
   let twitter = `${variablesz.twitter}`;
   let linkedin = `${variablesz.linkedin}`;
   let github = `${variablesz.github}`;
+  let socialMediaPosition = `${variablesz.socialMediaPosition}`;
 
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
@@ -751,15 +752,20 @@ function render(variablesz = {}) {
   if (variablesz.country == "Canada") {
     variablesz.city = "Toronto";
   }
+
+  if (socialMediaPosition != "right") {
+    socialMediaPosition = "left";
+  }
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
+${cover}
           <img src="${window.variablesz.avatarURL}" class="photo" />
           <h1>${variablesz.name} ${variablesz.lastname}</h1>
           <h2>${variablesz.role}</h2>
           <h3>${variablesz.city} ${variablesz.country}</h3>
 
-          <ul class="position-left">
+          <ul class=${variablesz.socialMediaPosition}>
             <li><a href="https://twitter.com/${variablesz.twitter}"><i class="fa fa-twitter"></i></a></li>
 
             <li><a href="https://github.com/${variablesz.github}"><i class="fa fa-github"></i></a></li>
@@ -780,11 +786,12 @@ window.onload = function () {
     // if includeCover is true the algorithm should
     includeCover: false,
     // this is the url of the image that will used as background for the profile cover
-    background: "https://cdn.pixabay.com/photo/2019/09/25/12/32/tree-4503535_1280.jpg",
+    background: "https://cdn.pixabay.com/photo/2012/03/04/00/43/architecture-22039_1280.jpg",
     // this is the url for the profile avatar
     avatarURL: "https://scontent-lht6-1.cdninstagram.com/v/t51.2885-15/e35/49858319_312445676051439_827303459566360947_n.jpg?_nc_ht=scontent-lht6-1.cdninstagram.com&_nc_cat=103&se=7&oh=cf1f9a2643edac3512bd03bf8a70caa6&oe=5E3C7F6C&ig_cache_key=MTk2MDUzNDcxNTg0MjEwNDU3Ng%3D%3D.2",
     // social media bar position (left or right)
     socialMediaPosition: "right",
+
     // social media usernames
     twitter: "something",
     github: "something",

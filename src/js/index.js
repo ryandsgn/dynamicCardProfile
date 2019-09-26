@@ -5,28 +5,80 @@ import "../style/index.scss";
  *  This function is called every time the user changes types or changes any input
  */
 function render(variablesz = {}) {
+  let name = `${variablesz.name}`;
+  let lastname = `${variablesz.lastname}`;
+  let role = `${variablesz.role}`;
+  let country = `${variablesz.country}`;
+  let city = `${variablesz.city}`;
+  let instagram = `${variablesz.instagram}`;
+  let twitter = `${variablesz.twitter}`;
+  let linkedin = `${variablesz.linkedin}`;
+  let github = `${variablesz.github}`;
+
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variablesz.background}" /></div>`;
   let githubLink = `${variablesz.github}`;
   if (variablesz.includeCover == false) cover = "<div class='cover'></div>";
+  if (variablesz.name == null) variablesz.name = " ";
+  if (variablesz.lastname === null) variablesz.lastname = "    ";
+  if (variablesz.role === null) variablesz.role = "Occupation";
+  if (variablesz.city == "  ") variablesz.city.value;
+  if (variablesz.country == "  ") variablesz.country.value;
+  if (variablesz.instagram == "something") variablesz.instagram = "   ";
+  if (variablesz.twitter === "something") variablesz.twitter = "   ";
+  if (variablesz.linkedin === "something") variablesz.linkedin = "   ";
+  if (variablesz.github === "something") variablesz.github = "   ";
 
+  if (variablesz.city == "Munich") {
+    variablesz.country = "Germany";
+  }
+  if (variablesz.city == "Miami") {
+    variablesz.country = "USA";
+  }
+  if (variablesz.city == "Caracas") {
+    variablesz.country = "Venezuela";
+  }
+  if (variablesz.city == "Toronto") {
+    variablesz.country = "Canada";
+  }
+
+  if (variablesz.country == "Germany") {
+    variablesz.city = "Munich";
+  }
+  if (variablesz.country == "USA") {
+    variablesz.city = "Miami";
+  }
+  if (variablesz.country == "Venezuela") {
+    variablesz.city = "Caracas";
+  }
+  if (variablesz.country == "Canada") {
+    variablesz.city = "Toronto";
+  }
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${window.variablesz.avatarURL}" class="photo" />
           <h1>${variablesz.name} ${variablesz.lastname}</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
+          <h2>${variablesz.role}</h2>
+          <h3>${variablesz.city} ${variablesz.country}</h3>
+
+          <ul class="position-left">
             <li><a href="https://twitter.com/${
               variablesz.twitter
             }"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${githubLink}"><i class="fa fa-github"></i></a></li>
+
+            <li><a href="https://github.com/${
+              variablesz.github
+            }"><i class="fa fa-github"></i></a></li>
+
             <li><a href="https://linkedin.com/${
               variablesz.linkedin
             }"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/alesanchezr"><i class="fa fa-instagram"></i></a></li>
+
+            <li><a href="https://instagram.com/${
+              variablesz.instagram
+            }"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -41,21 +93,22 @@ window.onload = function() {
     includeCover: false,
     // this is the url of the image that will used as background for the profile cover
     background:
-      "https://cdn.pixabay.com/photo/2018/05/27/15/51/walrus-3433733_1280.jpg",
+      "https://cdn.pixabay.com/photo/2019/09/25/12/32/tree-4503535_1280.jpg",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL:
+      "https://scontent-lht6-1.cdninstagram.com/v/t51.2885-15/e35/49858319_312445676051439_827303459566360947_n.jpg?_nc_ht=scontent-lht6-1.cdninstagram.com&_nc_cat=103&se=7&oh=cf1f9a2643edac3512bd03bf8a70caa6&oe=5E3C7F6C&ig_cache_key=MTk2MDUzNDcxNTg0MjEwNDU3Ng%3D%3D.2",
     // social media bar position (left or right)
     socialMediaPosition: "right",
     // social media usernames
     twitter: "something",
     github: "something",
     linkedin: "something",
-    instagram: null,
+    instagram: "something",
     name: null,
     lastname: null,
     role: null,
-    country: null,
-    city: null
+    country: " country ",
+    city: " city "
   };
   render(window.variablesz);
   document.querySelectorAll(".picker").forEach(function(elm) {
